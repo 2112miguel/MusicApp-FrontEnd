@@ -1,7 +1,6 @@
 import React from 'react'
 import { AppContext } from '../../Context/AppContext'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import Alert from 'react-bootstrap/Alert'
 import { MusicianPaidEvents } from '../../Components/MusicianPaidEvents/MusicianPaidEvents'
 import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
@@ -11,7 +10,6 @@ export const MusicianEvents = () => {
     const [events, setEvents] = React.useState([])
     const [eventsAccepted, seteventsAccepted] = React.useState([])
     const [Loading, setLoading] = React.useState(true)
-    const token = localStorage.getItem('musicAppToken')
     const [showAlertAccept, setShowAlertAccept] = React.useState(false)
     const [showAlertRefused, setShowAlertRefused] = React.useState(false)
     React.useEffect(() => {
@@ -35,7 +33,7 @@ export const MusicianEvents = () => {
                 seteventsAccepted(res.data.payload)
             })
         setLoading(false)
-    }, [])
+    }, [Context.api.apiUrl])
     return (
         <>
             <NavbarOp2 />

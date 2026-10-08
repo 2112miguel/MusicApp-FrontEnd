@@ -4,7 +4,7 @@ import { AppContext } from '../../Context/AppContext'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Uppy from '@uppy/core'
 import Transloadit from '@uppy/transloadit'
 import Alert from 'react-bootstrap/Alert'
@@ -20,10 +20,8 @@ export const EditProfileMusician = () => {
     const [uppy, setUppy] = useState()
     const [isUploadingFile, setIsUploadingFile] = useState(false)
     const [estado, setEstado] = React.useState(null)
-    const [passwordUser, setPasswordUser] = React.useState(null)
     const [imgeUpload, setImgeUpload] = useState(null)
     const [show, setShow] = React.useState(false)
-    const [showError, setshowError] = React.useState(false)
 
     const onCompleteUploadFiles = (assembly) => {
         // aqui pueden tomar la url de la imagen para ponerla en un estado y mandarla al API
@@ -77,7 +75,7 @@ export const EditProfileMusician = () => {
             })
             .on('transloadit:complete', onCompleteUploadFiles)
         setUppy(uppyInstance)
-    }, [])
+    }, [Context.api.apiUrl, token])
     const handleSave = (e) => {
         e.preventDefault()
         if (user.password) {

@@ -4,13 +4,12 @@ import { AppContext } from '../../Context/AppContext'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Uppy from '@uppy/core'
 import Transloadit from '@uppy/transloadit'
 import Alert from 'react-bootstrap/Alert'
 import { StatesSelect } from '../../Components/StatesSelect/StatesSelect'
 import { MunicipalitySelect } from '../../Components/MunicipalitySelect/MunicipalitySelect'
-import { dark } from '@mui/material/styles/createPalette'
 import '@uppy/core/dist/style.css'
 import '@uppy/file-input/dist/style.css'
 export const EditProfileUser = () => {
@@ -75,7 +74,7 @@ export const EditProfileUser = () => {
             })
             .on('transloadit:complete', onCompleteUploadFiles)
         setUppy(uppyInstance)
-    }, [])
+    }, [Context.api.apiUrl, token])
 
     const handleSave = (e) => {
         e.preventDefault()
