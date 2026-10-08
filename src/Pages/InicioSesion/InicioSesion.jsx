@@ -1,7 +1,6 @@
 import React from 'react'
 import './InicioSesion.scss'
 import { Link } from 'react-router-dom'
-import { Navbar } from '../../Components/Navbar/Navbar'
 import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
 
 export const InicioSesion = () => {
@@ -11,11 +10,11 @@ export const InicioSesion = () => {
             <div className="InicioSesion">
                 <div className='left-container'>
                     
-                    <div className="shot1"> <img src="https://www.tenhomaisdiscosqueamigos.com/wp-content/uploads/2019/05/M%C3%BAsico-triste-shutterstock_143096134.jpg" className='foto1'/></div>
+                    <div className="shot1"> <img src="https://www.tenhomaisdiscosqueamigos.com/wp-content/uploads/2019/05/M%C3%BAsico-triste-shutterstock_143096134.jpg" className='foto1' alt="" /></div>
                     
                     
-                    <div className="shot1"> <img src="https://musicopolix.com/blog/wp-content/uploads/2014/10/musicos-en-activo-1024x5761.jpg" className='foto1'/></div>
-                    <div className="shot1"> <img src="http://musicologos.la/wp-content/uploads/2017/04/1400a-1.jpg" className='foto1' /></div>
+                    <div className="shot1"> <img src="https://musicopolix.com/blog/wp-content/uploads/2014/10/musicos-en-activo-1024x5761.jpg" className='foto1' alt="" /></div>
+                    <div className="shot1"> <img src="http://musicologos.la/wp-content/uploads/2017/04/1400a-1.jpg" className='foto1' alt="" /></div>
 
                 </div>
                

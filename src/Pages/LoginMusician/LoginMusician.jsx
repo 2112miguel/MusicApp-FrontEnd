@@ -1,4 +1,4 @@
-import React, { useContext, useEffects } from 'react'
+import React from 'react'
 import './LoginMusician.scss'
 import { AppContext } from '../../Context/AppContext'
 import { useNavigate } from 'react-router-dom'
@@ -50,6 +50,7 @@ export const LoginMusician = () => {
                         <img
                             src="https://images.pexels.com/photos/5137290/pexels-photo-5137290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                             className="foto1"
+                            alt=""
                         />
                     </div>
 
@@ -58,6 +59,7 @@ export const LoginMusician = () => {
                         <img
                             src="https://images.pexels.com/photos/5470113/pexels-photo-5470113.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                             className="foto1"
+                            alt=""
                         />
                     </div>
                     <div className="shot1">
@@ -65,6 +67,7 @@ export const LoginMusician = () => {
                         <img
                             src="https://images.pexels.com/photos/878999/pexels-photo-878999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                             className="foto1"
+                            alt=""
                         />
                     </div>
                 </div>

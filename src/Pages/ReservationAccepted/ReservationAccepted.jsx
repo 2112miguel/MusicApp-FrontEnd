@@ -2,7 +2,6 @@ import React from 'react'
 import './ReservationAccepted.scss'
 import { AppContext } from '../../Context/AppContext'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
 import Alert from 'react-bootstrap/Alert'
 import { CardEventProgress } from '../../Components/CardEventProgress/CardEventProgress'
@@ -14,8 +13,6 @@ export const ReservationAccepted = () => {
     const [showAlertAccept, setShowAlertAccept] = React.useState(false)
     const [showAlertRefused, setShowAlertRefused] = React.useState(false)
     const Context = React.useContext(AppContext)
-    const navigate = useNavigate()
-    const token = localStorage.getItem('musicAppToken')
     const [Loading, setLoading] = React.useState(true)
 
     React.useEffect(() => {
@@ -39,7 +36,7 @@ export const ReservationAccepted = () => {
                 setEventsProgress(res.data.payload)
             })
         setLoading(false)
-    }, [])
+    }, [Context.api.apiUrl])
 
     return (
         <div>

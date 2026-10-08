@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import './Login.scss'
 import { AppContext } from '../../Context/AppContext'
 import { useNavigate } from 'react-router-dom'
-import { Navbar } from '../../Components/Navbar/Navbar'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
@@ -59,6 +58,7 @@ export const Login = () => {
                         <img
                             src="https://images.squarespace-cdn.com/content/v1/5ea8c686e90f6a69b5967072/82f37eee-4bc6-4fad-a9ae-cc75d49d21c0/Gonzales%2C+Suemy.jpg"
                             className="foto1"
+                            alt=""
                         />
                     </div>
                     <div className="shot1">
@@ -66,6 +66,7 @@ export const Login = () => {
                         <img
                             src="https://static.wixstatic.com/media/35b780_585c5277d75c48059aaabaa946ff2d13~mv2.jpg/v1/fill/w_640,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/35b780_585c5277d75c48059aaabaa946ff2d13~mv2.jpg"
                             className="foto1"
+                            alt=""
                         />
                     </div>
                 </div>

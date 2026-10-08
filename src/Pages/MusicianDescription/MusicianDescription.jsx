@@ -1,7 +1,6 @@
 import React from 'react'
 import { ReserveButton } from '../../Components/ReserveButton/ReserveButton'
 import './MusicianDescription.scss'
-import { Navbar } from '../../Components/Navbar/Navbar'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { AppContext } from '../../Context/AppContext'
@@ -17,7 +16,7 @@ export const MusicianDescription = () => {
             setMusico(res.data.payload)
             setLoading(false)
         })
-    }, [])
+    }, [Context.api.apiUrl, id])
 
     return (
         <section className="sectionMusicanDes">
@@ -31,7 +30,6 @@ export const MusicianDescription = () => {
                 <>
                     <Header img={musico[0].imagenMusico} />
                     <div className="page-container">
-                        <h3></h3>
                         <div className="group-container">
                             <div className="img-info-container">
                                 <img
@@ -46,7 +44,7 @@ export const MusicianDescription = () => {
                                     <span className="band">
                                         Genero: {musico[0].genero}
                                     </span>
-                                    {Context.user.typeClient != 'Musico' ? (
+                                    {Context.user.typeClient !== 'Musico' ? (
                                         <ReserveButton id={musico[0].id} />
                                     ) : (
                                         <></>

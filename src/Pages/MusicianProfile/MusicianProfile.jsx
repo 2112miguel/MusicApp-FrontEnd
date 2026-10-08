@@ -7,7 +7,6 @@ import Musico from '../../Components/Musico/Musico'
 export const MusicianProfile = () => {
     const Context = React.useContext(AppContext)
     const [musician, setMusician] = React.useState([])
-    const [Loading, setLoading] = React.useState(true)
 
     React.useEffect(() => {
         const token = localStorage.getItem('musicAppToken')
@@ -19,7 +18,6 @@ export const MusicianProfile = () => {
             })
             .then((res) => {
                 setMusician(res.data.payload[0])
-                setLoading(false)
             })
     }, [Context.api.apiUrl])
 

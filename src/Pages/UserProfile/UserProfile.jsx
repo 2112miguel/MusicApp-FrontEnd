@@ -1,15 +1,12 @@
 import React from 'react'
 import './UserProfile.scss'
 import { Link } from 'react-router-dom'
-import { Navbar } from '../../Components/Navbar/Navbar'
-import { ReservationCard } from '../../Components/ReservationCard/ReservationCard'
 import { AppContext } from '../../Context/AppContext'
 import '../../Icons/pen.svg'
 import axios from 'axios'
 import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
 export const UserProfile = () => {
     const Context = React.useContext(AppContext)
-    const [events, setEvents] = React.useState([])
 
     React.useEffect(() => {
         const token = localStorage.getItem('musicAppToken')
@@ -19,10 +16,7 @@ export const UserProfile = () => {
                     token: token,
                 },
             })
-            .then((res) => {
-                setEvents(res.data.payload)
-            })
-    }, [])
+    }, [Context.api.apiUrl])
     return (
         <section>
             <NavbarOp2 />

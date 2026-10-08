@@ -1,8 +1,6 @@
 import React from 'react'
 import './Reservation.scss'
-import { Navbar } from '../../Components/Navbar/Navbar'
 import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
@@ -14,8 +12,6 @@ import { useNavigate } from 'react-router-dom'
 import Alert from 'react-bootstrap/Alert'
 import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { purple } from '@mui/material/colors'
-import { UserProfile } from '../UserProfile/UserProfile'
 import { StatesSelect } from '../../Components/StatesSelect/StatesSelect'
 import { MunicipalitySelect } from '../../Components/MunicipalitySelect/MunicipalitySelect'
 
@@ -44,7 +40,7 @@ export const Reservation = () => {
             setMusico(res.data.payload[0])
             setLoading(false)
         })
-    }, [])
+    }, [Context.api.apiUrl, id])
 
     const theme = createTheme({
         typography: {
@@ -85,17 +81,17 @@ export const Reservation = () => {
             Math.abs(Math.round(diff)) * parseFloat(musico.cobroPorHora)
 
         if (
-            parseDayOne == parseDayTwo ||
+            parseDayOne === parseDayTwo ||
             parseDayOne > parseDayTwo ||
             event === null ||
             estado === null ||
-            estado.estado == [] ||
-            estado.municipality == [] ||
-            event.calle == '' ||
-            event.colonia == '' ||
-            event.descripcion == '' ||
-            event.numero == '' ||
-            event.titulo == ''
+            !estado.estado ||
+            !estado.municipality ||
+            event.calle === '' ||
+            event.colonia === '' ||
+            event.descripcion === '' ||
+            event.numero === '' ||
+            event.titulo === ''
         ) {
             setShowFalse(true)
         } else {
