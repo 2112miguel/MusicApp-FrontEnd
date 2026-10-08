@@ -13,11 +13,13 @@ import axios from 'axios'
 export const NavbarOp2 = () => {
     const Context = React.useContext(AppContext)
     const navigate = useNavigate()
+    const apiUrl = Context.api.apiUrl
+    const setUserId = Context.setUserId
     React.useEffect(() => {
         const token = localStorage.getItem('musicAppToken')
         axios
             .post(
-                `${Context.api.apiUrl}/auth/login/verify`,
+                `${apiUrl}/auth/login/verify`,
                 {},
                 {
                     headers: {
@@ -26,10 +28,10 @@ export const NavbarOp2 = () => {
                 }
             )
             .then((res) => {
-                Context.setUserId(res.data.payload[0])
+                setUserId(res.data.payload[0])
             })
             .catch((error) => {})
-    }, [])
+    }, [apiUrl, setUserId])
     return (
         <Navbar
             collapseOnSelect
@@ -57,7 +59,7 @@ export const NavbarOp2 = () => {
                     </Nav>
                     <Nav>
                         {Context.user.name !== '' ? (
-                            Context.user.typeClient == 'Musico' ? (
+                            Context.user.typeClient === 'Musico' ? (
                                 <ButtonTranspOrg
                                     href="/profilemusician"
                                     label="Mi perfil"
@@ -75,7 +77,7 @@ export const NavbarOp2 = () => {
                             />
                         )}
                         {Context.user.name !== '' ? (
-                            Context.user.typeClient == 'Musico' ? (
+                            Context.user.typeClient === 'Musico' ? (
                                 <ButtonTranspOrg
                                     href="/musician/events"
                                     label="Mis Eventos"

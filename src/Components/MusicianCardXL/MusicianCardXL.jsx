@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import './MusicianCardXL.scss'
-import { AvatarImg } from '../AvatarImg/AvatarImg'
 import { ButtonTranspOrg } from '../ButtonTranspOrg/ButtonTranspOrg'
 import { useNavigate } from 'react-router-dom'
 

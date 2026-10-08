@@ -1,7 +1,6 @@
 import React from 'react'
 import { AppContext } from '../../Context/AppContext'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import './CardEventPayment.scss'
 
 export const CardEventPayment = ({ event }) => {
@@ -15,6 +14,7 @@ export const CardEventPayment = ({ event }) => {
                     <img
                         src={event.musicoId[0].imagenMusico}
                         className="musicoImg"
+                        alt={event.musicoId[0].nombreArtistico}
                     />
                 </div>
 

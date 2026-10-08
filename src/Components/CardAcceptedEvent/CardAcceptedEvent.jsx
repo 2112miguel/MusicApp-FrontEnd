@@ -12,7 +12,6 @@ export const CardAcceptedEvent = ({
     const Context = React.useContext(AppContext)
     const token = localStorage.getItem('musicAppToken')
     const navigate = useNavigate()
-    const [Loading, setLoading] = React.useState(true)
     const months = [
         'enero',
         'febrero',

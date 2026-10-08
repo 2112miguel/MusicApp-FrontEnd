@@ -17,7 +17,7 @@ const apiUrl = {
 
 export const AppProvider = ({ children }) => {
     const [user, setUser] = useState(userID)
-    const [api, setApi] = useState(apiUrl)
+    const [api] = useState(apiUrl)
     const setUserId = (user) => {
         setUser({
             name: user.name,

@@ -5,14 +5,10 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 export const CardNewEvents = (event) => {
-    const [eventSave, setEventSave] = React.useState(event.event)
+    const eventSave = event.event
     const Context = React.useContext(AppContext)
     const token = localStorage.getItem('musicAppToken')
     const navigate = useNavigate()
-    React.useEffect(() => {
-        const dayOne = new Date(eventSave.fechaInicio)
-        //console.log(dayOne.getDate())
-    }, [])
     const handleAcceptEvent = (e) => {
         e.preventDefault()
         axios

@@ -12,7 +12,7 @@ export const ReserveButton = (id) => {
             <button
                 className="btn-reserve"
                 onClick={() => {
-                    if (Context.user.typeClient == '')
+                    if (Context.user.typeClient === '')
                         navigate(`/crearcuenta/cliente`)
                     else navigate(`/reservation/${id.id}`)
                 }}

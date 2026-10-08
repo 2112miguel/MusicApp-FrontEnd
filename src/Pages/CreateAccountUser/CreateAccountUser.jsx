@@ -24,12 +24,12 @@ export const CreateAccountUser = () => {
     const handleAccount = (e) => {
         e.preventDefault()
         //
-        const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        const mailformat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
 
         if (
             estado === null ||
-            estado.estado === [] ||
-            estado.municipality == [] ||
+            !estado.estado ||
+            !estado.municipality ||
             user.email === '' ||
             user.lastname === '' ||
             user.name === '' ||
@@ -80,6 +80,7 @@ export const CreateAccountUser = () => {
                                 <img
                                     src="https://images.pexels.com/photos/5137290/pexels-photo-5137290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                                     className="foto1"
+                                    alt=""
                                 />
                             </div>
                             <div className="shot1">
@@ -87,6 +88,7 @@ export const CreateAccountUser = () => {
                                 <img
                                     src="https://images.pexels.com/photos/5470113/pexels-photo-5470113.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                                     className="foto1"
+                                    alt=""
                                 />
                             </div>
                             <div className="shot1">
@@ -94,6 +96,7 @@ export const CreateAccountUser = () => {
                                 <img
                                     src="https://images.pexels.com/photos/878999/pexels-photo-878999.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                                     className="foto1"
+                                    alt=""
                                 />
                             </div>
                         </div>
@@ -150,7 +153,7 @@ export const CreateAccountUser = () => {
                             <label className="labelCreateUse">Estado</label>
                                 <div className='state'>
                             <StatesSelect setEstado={setEstado} /></div>
-                            {estado == null ? (
+                            {estado === null ? (
                                 <></>
                             ) : (
                            <div className='state'>    <MunicipalitySelect

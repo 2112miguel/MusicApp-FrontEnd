@@ -1,7 +1,5 @@
 import React from 'react'
 import './CreateAccountMusician.scss'
-import { Link } from 'react-router-dom'
-import { Navbar } from '../../Components/Navbar/Navbar'
 import { AppContext } from '../../Context/AppContext'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -20,7 +18,6 @@ export const CreateAccountMusician = () => {
         apellidoMaterno: '',
         correo: '',
         contrasenia: '',
-        genero: '',
         cobroPorHora: '',
         genero: '',
         nombreArtistico: '',
@@ -32,13 +29,13 @@ export const CreateAccountMusician = () => {
     const [estado, setEstado] = React.useState(null)
     const context = React.useContext(AppContext)
     const navigate = useNavigate()
-    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    const mailformat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
     const handleAccount = (e) => {
         e.preventDefault()
         if (
             estado === null ||
-            estado.estado === [] ||
-            estado.municipality == [] ||
+            !estado.estado ||
+            !estado.municipality ||
             user.correo === '' ||
             user.apellidoMaterno === '' ||
             user.nombre === '' ||
@@ -46,11 +43,11 @@ export const CreateAccountMusician = () => {
             user.contrasenia === '' ||
             user.cobroPorHora === '' ||
             user.genero === '' ||
-            user.nombreArtistico == '' ||
-            user.horarioDiaDos == '' ||
-            user.horarioDiaUno == '' ||
-            user.horarioFin == '' ||
-            user.horarioInicio == ''
+            user.nombreArtistico === '' ||
+            user.horarioDiaDos === '' ||
+            user.horarioDiaUno === '' ||
+            user.horarioFin === '' ||
+            user.horarioInicio === ''
         )
             setShowFalse(true)
         else {
@@ -106,6 +103,7 @@ export const CreateAccountMusician = () => {
                                 <img
                                     src="https://images.pexels.com/photos/5862809/pexels-photo-5862809.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                                     className="foto1"
+                                    alt=""
                                 />
                             </div>
                             <div className="shot1">
@@ -113,6 +111,7 @@ export const CreateAccountMusician = () => {
                                 <img
                                     src="https://images.pexels.com/photos/11794657/pexels-photo-11794657.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                                     className="foto1"
+                                    alt=""
                                 />
                             </div>
                             <div className="shot1">
@@ -120,6 +119,7 @@ export const CreateAccountMusician = () => {
                                 <img
                                     src="https://images.pexels.com/photos/11794660/pexels-photo-11794660.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                                     className="foto1"
+                                    alt=""
                                 />
                             </div>
                         </div>
@@ -223,7 +223,7 @@ export const CreateAccountMusician = () => {
                             <div className="state">
                                 <StatesSelect setEstado={setEstado} />
                             </div>
-                            {estado == null ? (
+                            {estado === null ? (
                                 <></>
                             ) : (
                                 <div className="state">

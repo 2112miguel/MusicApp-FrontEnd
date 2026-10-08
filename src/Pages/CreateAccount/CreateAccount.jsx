@@ -3,7 +3,6 @@
 import React from 'react'
 import './CreateAccount.scss'
 import { Link } from 'react-router-dom'
-import { Navbar } from '../../Components/Navbar/Navbar'
 import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
 export const CreateAccount = () => {
     return (
@@ -11,9 +10,9 @@ export const CreateAccount = () => {
             <NavbarOp2 />
             <div className="CreateAccount">
                  <div className='left-container'>
-                    <div className="shot1"> <img src='https://images.pexels.com/photos/210766/pexels-photo-210766.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className='foto1'/></div>             
-                    <div className="shot1"> <img src='https://images.pexels.com/photos/2921541/pexels-photo-2921541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'  className='foto1'/></div>
-                    <div className="shot1"> <img src='https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className='foto1' /></div>
+                    <div className="shot1"> <img src='https://images.pexels.com/photos/210766/pexels-photo-210766.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className='foto1' alt="" /></div>             
+                    <div className="shot1"> <img src='https://images.pexels.com/photos/2921541/pexels-photo-2921541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'  className='foto1' alt="" /></div>
+                    <div className="shot1"> <img src='https://images.pexels.com/photos/811838/pexels-photo-811838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className='foto1' alt="" /></div>
 
                 </div>
 
