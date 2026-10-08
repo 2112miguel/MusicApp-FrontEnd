@@ -1,5 +1,20 @@
-@import '../../scss/variables.scss';
+.FamousPhrase-Container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+}
 
-.landingContainer{
-    background-color: white;
+.MusicianCards-Container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 8rem;
+    gap: 1rem;
+}
+
+.landing-error {
+    color: white;
+    text-align: center;
 }

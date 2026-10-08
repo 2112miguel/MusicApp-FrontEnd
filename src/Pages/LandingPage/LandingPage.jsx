@@ -1,33 +1,55 @@
 import React from 'react'
 import './LandingPage.scss'
-import { Navbar } from '../../Components/Navbar/Navbar'
-import { CardLogo } from '../../Components/CardLogo/CardLogo'
-import { CardMusician } from '../../Components/CardMusician/CardMusician'
+import { CarouselComp } from '../../Components/Carousel/CarouselComp'
+import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
+import { MusicianCardXL } from '../../Components/MusicianCardXL/MusicianCardXL'
+import { FamousPhrase } from '../../Components/FamousPhrase/FamousPhrase'
+import { FooterPage } from '../../Components/FooterPage/FooterPage'
 import axios from 'axios'
 import { AppContext } from '../../Context/AppContext'
 import { useNavigate } from 'react-router-dom'
 import Alert from 'react-bootstrap/Alert'
-import { NavbarOp2 } from '../../Components/Navbar/NavbarOp2'
 
 export const LandingPage = () => {
     const Context = React.useContext(AppContext)
-    const [musico, setMusico] = React.useState([])
+    const [musicos, setMusicos] = React.useState([])
     const navigate = useNavigate()
     const [showClient, setShowClient] = React.useState(false)
     const [showMusician, setShowMusician] = React.useState(false)
-    console.log(process.env.REACT_APP_MY_ENVIRONMENT_VARIABLE)
+    const [loading, setLoading] = React.useState(true)
+    const [error, setError] = React.useState(null)
+    const apiUrl = Context.api.apiUrl
+    const userType = Context.user.typeClient
+
+    const loadMusicians = React.useCallback(async () => {
+        setLoading(true)
+        setError(null)
+
+        try {
+            const response = await axios.get(`${apiUrl}/musician/all`, {
+                timeout: 15000,
+            })
+            setMusicos(response.data.payload)
+        } catch (requestError) {
+            setError(
+                'No pudimos cargar los músicos. Verifica tu conexión e inténtalo de nuevo.'
+            )
+        } finally {
+            setLoading(false)
+        }
+    }, [apiUrl])
+
+    React.useEffect(() => {
+        loadMusicians()
+    }, [loadMusicians])
 
     React.useEffect(() => {
         const token = localStorage.getItem('musicAppToken')
-        axios.get(`${Context.api.apiUrl}/musician/all`).then((res) => {
-            setMusico(res.data.payload)
-        })
-        if (Context.user.typeClient == 'Client') {
+
+        if (userType === 'Client') {
             axios
-                .get(`${Context.api.apiUrl}/event/client/eventAccept`, {
+                .get(`${apiUrl}/event/client/eventAccept`, {
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': 'true',
                         token: token,
                     },
                 })
@@ -37,9 +59,9 @@ export const LandingPage = () => {
                     }
                 })
         }
-        if (Context.user.typeClient == 'Musico') {
+        if (userType === 'Musico') {
             axios
-                .get(`${Context.api.apiUrl}/event/musician/newEvent`, {
+                .get(`${apiUrl}/event/musician/newEvent`, {
                     headers: {
                         token: token,
                     },
@@ -51,56 +73,78 @@ export const LandingPage = () => {
                     }
                 })
         }
-    }, [])
+    }, [apiUrl, userType])
 
     return (
-        <div className="text-white">
+        <div style={{ backgroundColor: '#01172f' }}>
             <NavbarOp2 />
-            <Alert show={showClient} variant="success">
-                <Alert.Heading>Evento aceptado!</Alert.Heading>
-                <p>
-                    El musico acepto tu evento puedes ir a pagar al siguiente
-                    boton
-                </p>
-                <div className="d-flex justify-content-end">
-                    <button
-                        className="btn btn-outline-primary"
-                        onClick={() => navigate('reservationaccepted')}
-                        variant="outline-success"
-                    >
-                        Ir a mis eventos
-                    </button>
+            <main>
+                <CarouselComp />
+                <Alert show={showClient} variant="success">
+                    <Alert.Heading>¡Evento aceptado!</Alert.Heading>
+                    <p>El músico aceptó tu evento. Ya puedes ir a pagarlo.</p>
+                    <div className="d-flex justify-content-end">
+                        <button
+                            className="btn btn-outline-primary"
+                            onClick={() => navigate('/reservationaccepted')}
+                        >
+                            Ir a mis eventos
+                        </button>
+                    </div>
+                </Alert>
+                <Alert show={showMusician} variant="success">
+                    <Alert.Heading>¡Tienes nuevos eventos!</Alert.Heading>
+                    <p>Revísalos para aceptarlos o rechazarlos.</p>
+                    <div className="d-flex justify-content-end">
+                        <button
+                            className="btn btn-outline-primary"
+                            onClick={() => navigate('/musician/events')}
+                        >
+                            Ir a mis eventos
+                        </button>
+                    </div>
+                </Alert>
+                <div className="FamousPhrase-Container">
+                    <FamousPhrase />
                 </div>
-            </Alert>
-            <Alert show={showMusician} variant="success">
-                <Alert.Heading>Tienes nuevos eventos!</Alert.Heading>
-                <p>
-                    Tienes nuevos eventos puedes aceptarlos dando click en el
-                    siguiente boton.
-                </p>
-                <div className="d-flex justify-content-end">
-                    <button
-                        className="btn btn-outline-primary"
-                        onClick={() => navigate('musician/events')}
-                        variant="outline-success"
-                    >
-                        Ir a mis eventos
-                    </button>
+                <div className="MusicianCards-Container">
+                    {loading && (
+                        <div
+                            className="spinner-border text-primary"
+                            role="status"
+                        >
+                            <span className="visually-hidden">
+                                Cargando músicos...
+                            </span>
+                        </div>
+                    )}
+                    {error && (
+                        <div className="landing-error" role="alert">
+                            <p>{error}</p>
+                            <button
+                                className="btn btn-outline-light"
+                                onClick={loadMusicians}
+                            >
+                                Reintentar
+                            </button>
+                        </div>
+                    )}
+                    {!loading && !error && musicos.length === 0 && (
+                        <p className="text-white">
+                            No hay músicos disponibles por el momento.
+                        </p>
+                    )}
+                    {!loading &&
+                        !error &&
+                        musicos.map((musico) => (
+                            <MusicianCardXL
+                                key={musico.id ?? musico._id}
+                                musico={musico}
+                            />
+                        ))}
                 </div>
-            </Alert>
-            <CardLogo />
-            <section className="d-flex flex-column align-items-center">
-                <article className="my-3">
-                    <h2>Musicos y cantantes</h2>
-                </article>
-                <section className="d-flex justify-content-center">
-                    <article className="">
-                        {musico.map((musico, key) => {
-                            return <CardMusician key={key} musico={musico} />
-                        })}
-                    </article>
-                </section>
-            </section>
+            </main>
+            <FooterPage />
         </div>
     )
 }
